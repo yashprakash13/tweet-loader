@@ -1,7 +1,8 @@
-from fastapi import FastAPI
-import tweepy
 import os
+
+import tweepy
 from dotenv import load_dotenv
+from fastapi import FastAPI
 
 load_dotenv()
 
@@ -26,7 +27,6 @@ def get_user_tweets():
     )
     user = client.get_user(username="writes_eve").data.id
     # all_tweets = client.get_users_tweets(id = user, exclude="retweets", max_results=10)
-    # print(all_tweets)
     tweets = []
     for response in tweepy.Paginator(
         client.get_users_tweets, id=user, exclude="retweets", max_results=100
