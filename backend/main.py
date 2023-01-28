@@ -7,7 +7,7 @@ load_dotenv()
 
 from modules.get_tweets import get_user_tweets
 
-app = FastAPI()
+app = FastAPI(title="Tweet Loader API")
 
 
 @app.get("/get-user-tweets/{username}", response_model=Page[TweetModel])
