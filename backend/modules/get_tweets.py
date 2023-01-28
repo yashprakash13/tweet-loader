@@ -1,6 +1,10 @@
 import os
+from typing import List
 
 import tweepy
+from pydantic import parse_obj_as
+
+from .models.tweet_model import TweetModel
 
 API_KEY = os.environ.get("API_KEY")
 API_KEY_SECRET = os.environ.get("API_KEY_SECRET")
@@ -9,7 +13,7 @@ ACCESS_TOKEN = os.environ.get("ACCESS_TOKEN")
 ACCESS_TOKEN_SECRET = os.environ.get("ACCESS_TOKEN_SECRET")
 
 
-def get_user_tweets(username: str):
+async def get_user_tweets(username: str) -> List[TweetModel]:
     client = tweepy.Client(
         bearer_token=BEARER_TOKEN,
         consumer_key=API_KEY,
@@ -20,11 +24,9 @@ def get_user_tweets(username: str):
     )
     user = client.get_user(username=username).data.id
     # all_tweets = client.get_users_tweets(id = user, exclude="retweets", max_results=10)
-    tweets = []
+    all_tweets = []
     for response in tweepy.Paginator(
         client.get_users_tweets, id=user, exclude="retweets", max_results=100
     ):
-        print(type(response.data))
-        tweets.append({"id": response.data[0].id, "text": response.data[0].text})
-
-    return {"all_tweets": tweets}
+        all_tweets.extend(parse_obj_as(List[TweetModel], response.data))
+    return all_tweets
