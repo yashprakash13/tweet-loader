@@ -32,8 +32,8 @@ function App() {
           ))}
         </div>
       ) : (
-        <div className="empty">
-          <h2>No tweets found</h2>
+        <div className="w-full mt-[4rem] flex justify-center items-center text-2xl color-[#fff] font-inria">
+          No tweets found
         </div>
       )}
     </div>
