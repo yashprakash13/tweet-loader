@@ -22,11 +22,11 @@ function App() {
     getUserTweets("writes_eve")
   }, [])
   return (
-    <div className="App bg-[#F8B195] w-full h-screen overflow-hidden">
+    <div className="App bg-[#F8B195] w-full h-screen  overflow-auto">
       <Title />
       <Search />
       {tweets?.length > 0 ? (
-        <div className="container">
+        <div className="w-full flex flex-wrap items-center justify-center font-inria mx-auto mt-[4rem]">
           {tweets.map((tweet) => (
             <ResultCard tweet={tweet} />
           ))}
