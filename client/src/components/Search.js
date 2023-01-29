@@ -7,7 +7,7 @@ const Search = () => {
         <input
           type="text"
           id="password"
-          class="rounded-full w-[42rem] h-[3rem] pl-[2rem] bg-[#355C7D] text-[#fff] focus:outline-none"
+          class="rounded-full w-[42rem] h-[3rem] pl-[2rem] bg-[#355C7D] text-[#fff] focus:outline-none placeholder:text-[#fff]"
           placeholder="Type a username..."
         />
         <HiSearch color="white" class=" text-xl mr-[2rem]" />
