@@ -7,11 +7,12 @@ import ResultCard from "./components/ResultCard"
 
 function App() {
   const [tweets, setTweets] = useState([])
-  const getUserTweets = (username) => {
-    fetch(`http://localhost:8000/get-user-tweets/${username}`)
+  const [searchTerm, setSearchTerm] = useState("")
+  const getUserTweets = async (username) => {
+    await fetch(`http://localhost:8000/get-user-tweets/${username}`)
       .then((response) => response.json())
       .then((data) => {
-        console.log(data)
+        // console.log(data["items"].length)
         setTweets(data["items"])
       })
       .catch((err) => {
@@ -19,16 +20,20 @@ function App() {
       })
   }
   useEffect(() => {
-    getUserTweets("writes_eve")
+    getUserTweets(searchTerm)
   }, [])
   return (
     <div className="App bg-[#F8B195] w-full h-screen  overflow-auto">
       <Title />
-      <Search />
+      <Search
+        searchTerm={searchTerm}
+        setSearchTerm={setSearchTerm}
+        getUserTweets={getUserTweets}
+      />
       {tweets?.length > 0 ? (
         <div className="w-full flex flex-wrap items-center justify-center font-inria mx-auto mt-[4rem]">
           {tweets.map((tweet) => (
-            <ResultCard tweet={tweet} />
+            <ResultCard key={tweet.id} tweet={tweet} />
           ))}
         </div>
       ) : (
