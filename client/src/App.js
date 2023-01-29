@@ -12,7 +12,6 @@ function App() {
     await fetch(`http://localhost:8000/get-user-tweets/${username}`)
       .then((response) => response.json())
       .then((data) => {
-        // console.log(data["items"].length)
         setTweets(data["items"])
       })
       .catch((err) => {
