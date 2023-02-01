@@ -16,10 +16,10 @@ const Search = ({ searchTerm, setSearchTerm, getUserTweets }) => {
         />
         <HiSearch
           color="white"
-          className=" text-xl mr-[2rem]"
+          className=" text-xl mr-[2rem] cursor-pointer"
           onClick={() => {
             if (searchTerm.trim() !== "") {
-              getUserTweets(searchTerm)
+              getUserTweets()
             }
           }}
         />
