@@ -53,30 +53,33 @@ function App() {
         getUserTweets={getUserTweets}
       />
       {tweets?.length > 0 ? (
-        <div className="w-full flex flex-wrap items-center justify-center font-inria mx-auto mt-[4rem]">
-          {tweets.map((tweet) => (
-            <ResultCard key={tweet.id} tweet={tweet} />
-          ))}
-        </div>
+        <>
+          <div className="w-full flex flex-wrap items-center justify-center font-inria mx-auto mt-[4rem]">
+            {tweets.map((tweet) => (
+              <ResultCard key={tweet.id} tweet={tweet} />
+            ))}
+          </div>
+          <ReactPaginate
+            previousLabel={"Previous"}
+            nextLabel={"Next"}
+            pageCount={pagecount}
+            onPageChange={changePage}
+            marginPagesDisplayed={2}
+            pageRangeDisplayed={2}
+            disableInitialCallback={true}
+            containerClassName={
+              "my-[10rem] px-5 w-[38rem] h-16  flex flex-row flex-wrap mx-auto justify-around items-center bg-[#fff] border-[3px] text-primaryText border-primaryText font-inria"
+            }
+            disabledClassName={"text-[#D3D3D3] cursor-not-allowed"}
+            disabledLinkClassName={"cursor-not-allowed"}
+            activeClassName={"text-[#e37c7d] cursor-pointer"}
+          />
+        </>
       ) : (
         <div className="w-full mt-[4rem] flex justify-center items-center text-2xl color-[#fff] font-inria">
           No tweets found
         </div>
       )}
-      <ReactPaginate
-        previousLabel={"Previous"}
-        nextLabel={"Next"}
-        pageCount={pagecount}
-        onPageChange={changePage}
-        marginPagesDisplayed={2}
-        pageRangeDisplayed={2}
-        disableInitialCallback={true}
-        containerClassName={"paginationBttns"}
-        previousLinkClassName={"previousBttn"}
-        nextLinkClassName={"nextBttn"}
-        disabledClassName={"paginationDisabled"}
-        activeClassName={"paginationActive"}
-      />
     </div>
   )
 }
